@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100" viewBox="0 0 400 100">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+    
+    .title { 
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      fill: #333;
+    }
+    .countdown { 
+      font-family: 'Roboto', sans-serif;
+      font-size: 24px;
+      fill: #1a73e8;
+      font-weight: bold;
+    }
+  </style>
+  
+  <rect x="0" y="0" width="400" height="100" fill="#f0f0f0" rx="10" ry="10"/>
+  
+  <text x="200" y="30" text-anchor="middle" class="title">
+    Countdown zum Redaxo Tag
+  </text>
+  
+  <text id="countdown" x="200" y="70" text-anchor="middle" class="countdown">
+    Lädt...
+  </text>
+  
+  <script type="text/javascript">
+    <![CDATA[
+    function updateCountdown() {
+      const targetDate = new Date('2025-01-25T00:00:00');
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('countdown').textContent = 
+          `${days} Tage, ${hours} Std, ${minutes} Min, ${seconds} Sek`;
+      }
+    }
+
+    // Initial call
+    updateCountdown();
+
+    // Update every second
+    setInterval(updateCountdown, 1000);
+    ]]>
+  </script>
+</svg>
